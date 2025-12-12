@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-tasks"></i> Aplikasi To-Do List</h1>
+                <p class="subtitle">Kelola tugas Anda dengan mudah</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <i class="fas fa-list-check"></i>
+                    <span id="total-tasks">0</span>
+                    <span class="stat-label">Total Task</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="pending-tasks">0</span>
+                    <span class="stat-label">Belum Selesai</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="completed-tasks">0</span>
+                    <span class="stat-label">Selesai</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Action Buttons -->
+            <section class="action-section">
+                <div class="action-buttons">
+                    <button id="add-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Task Baru
+                    </button>
+                    <div class="filter-controls">
+                        <select id="filter-select" class="filter-select">
+                            <option value="all">Semua Task</option>
+                            <option value="pending">Belum Selesai</option>
+                            <option value="completed">Sudah Selesai</option>
+                        </select>
+                        <input type="text" id="search-input" class="search-input" placeholder="Cari task...">
+                    </div>  
+                </div>
+            </section>
+
+            <!-- Task List -->
+            <section class="task-section">
+                <div class="task-list-container">
+                    <h2><i class="fas fa-list-ul"></i> Daftar Tugas Saya</h2>
+
+                    <div class="task-list" id="task-list">
+                        <!-- Tasks will be loaded here -->
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list"></i>
+                            <h3>Belum ada task</h3>
+                            <p>Klik "Tambah Task Baru" untuk mulai menambahkan tugas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2025 Aplikasi To-Do List | Dibuat untuk Tugas CodingCamp</p>
+        </footer>
+    </div>
+
+    <!-- Modal Form untuk Tambah/Edit Task -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Tambah Task Baru</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <div class="form-group">
+                        <label for="task-title"><i class="fas fa-heading"></i> Nama Task</label>
+                        <input type="text" id="task-title" placeholder="Masukkan nama task" required minlength="3"
+                            maxlength="100">
+                        <div class="error-message" id="title-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-description"><i class="fas fa-align-left"></i> Deskripsi Task</label>
+                        <textarea id="task-description" placeholder="Tambahkan deskripsi task (opsional)" rows="3"
+                            maxlength="500"></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span>/500 karakter
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-date"><i class="fas fa-calendar-alt"></i> Tanggal Deadline</label>
+                        <input type="date" id="task-date" required>
+                        <div class="error-message" id="date-error"></div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary close-btn">Batal</button>
+                        <button type="submit" class="btn btn-primary" id="modal-submit-btn">
+                            <i class="fas fa-plus"></i> Tambah Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Konfirmasi Hapus</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus task ini?</p>
+                <p class="delete-task-title" id="delete-task-title"></p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-delete">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirm-delete">
+                        <i class="fas fa-trash"></i> Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
